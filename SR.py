@@ -34,16 +34,18 @@ if __name__ == '__main__':
         opt.scale_factor_init = 1 / in_scale
         opt.mode = 'train'
         dir2trained_model = functions.generate_dir2save(opt)
-        if (os.path.exists(dir2trained_model)):
-            Gs, Zs, reals, NoiseAmp = functions.load_trained_pyramid(opt)
-            opt.mode = mode
-        else:
-            print('*** Train SinGAN for SR ***')
-            real = functions.read_image(opt)
-            opt.min_size = 18
-            real = functions.adjust_scales2image_SR(real, opt)
-            train(opt, Gs, Zs, reals, NoiseAmp)
-            opt.mode = mode
+#         if (os.path.exists(dir2trained_model)):
+#             Gs, Zs, reals, NoiseAmp = functions.load_trained_pyramid(opt)
+#             opt.mode = mode
+#         else:
+
+        print('*** Train SinGAN for SR ***')
+        real = functions.read_image(opt)
+        opt.min_size = 18
+        real = functions.adjust_scales2image_SR(real, opt)
+        train(opt, Gs, Zs, reals, NoiseAmp)
+        opt.mode = mode
+        
         print('%f' % pow(in_scale, iter_num))
         Zs_sr = []
         reals_sr = []
